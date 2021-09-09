@@ -1,7 +1,7 @@
 <template>
 	<main class="container">
 		<div class="row justify-content-center">
-			<Select />
+			<Select :selectTypes="selectTypes" @performFilter="filterAlbums" />
 		</div>
 		<section id="album-container" class="my-5 py-5">
 			<CardAlbum v-for="(album, index) in albums" :key="index" :album="album" />
@@ -25,6 +25,20 @@ export default {
 			albums: [],
 		};
 	},
+	computed: {
+		selectTypes() {
+			const selectTypes = [];
+			for (var i = 0; i < this.albums.length; i++) {
+				console.log(this.albums[i].genre);
+				if (!selectTypes.includes(this.albums[i].genre)) {
+					selectTypes.push(this.albums[i].genre);
+				}
+			}
+			console.log(selectTypes);
+			return selectTypes;
+		},
+	},
+	methods: {},
 	created() {
 		axios
 			.get("https://flynn.boolean.careers/exercises/api/array/music")

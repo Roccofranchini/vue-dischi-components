@@ -1,10 +1,16 @@
 <template>
 	<div class="col-2">
-		<select v-model="select" name="" id="" class="">
-			<option value="" selected>All</option>
-			<option value="">pepp</option>
-			<option value="">papp</option>
-			<option value="">popp</option>
+		<select
+			v-model="select"
+			name=""
+			id=""
+			class=""
+			@change="$emit('performFilter', select)"
+		>
+			<option selected>All</option>
+			<option v-for="(type, index) in selectTypes" :key="index">{{
+				type
+			}}</option>
 		</select>
 	</div>
 </template>
@@ -17,6 +23,7 @@ export default {
 			select: "",
 		};
 	},
+	props: ["selectTypes"],
 };
 </script>
 
